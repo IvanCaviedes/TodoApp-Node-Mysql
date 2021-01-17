@@ -31,6 +31,9 @@ app.use(session({
 app.use(flash())
  
 
+const index = require('./routes/index')
+app.use('/', index)
+
 app.listen(server.port, (err) => {
     err ? console.log(err) : console.log(`servidor en el puerto ${server.port}: http://${server.host}:${server.port}`)
 })

@@ -1,0 +1,37 @@
+<%- include('../layouts/header'); %>
+
+
+
+  <div class="container container-md	">
+
+    <% if (messages.error) { %>
+      <div class="alert alert-danger text-center" role="alert">
+        <%- messages.error %>
+      </div>
+      <% } %>
+
+        <% if (messages.success) { %>
+          <div class="alert alert-success text-center" role="alert">
+            <%- messages.success %>
+          </div>
+          <% } %>
+
+
+            <h1 class="text-center">
+              <%= title %>
+            </h1>
+            <form action="/tareas/add" method="post" name="form1">
+              <div class="mb-3">
+                <label class="form-label">Nombre de la Tarea</label>
+                <input type="text" class="form-control" name="task_name" id="task_name" value="<%= task_name %>">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Descipcion de la Tarea</label>
+                <input type="text" class="form-control" name="task_description" id="task_description"
+                  value="<%= task_description %>">
+              </div>
+              <button type="submit" class="btn btn-primary" value="Add">Guardar</button>
+            </form>
+  </div>
+
+  <%- include('../layouts/footer'); %>

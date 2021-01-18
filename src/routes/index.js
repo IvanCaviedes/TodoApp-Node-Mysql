@@ -1,9 +1,9 @@
 var express = require('express')
-const path = require('path')
+const {getPath} = require('../helpers/index')
 var app = express()
- 
-app.get('/', function(req, res) {
-    res.render(path.join(__dirname+'/../views/index'), {title: 'TODO List App'})
+
+app.get('/', function (req, res) {
+    res.render(getPath('index'), { title: 'TODO List App' })
 })
 
 module.exports = app;

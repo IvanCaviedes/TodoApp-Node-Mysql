@@ -1,0 +1,71 @@
+<%- include('../layouts/header'); %>
+
+
+
+    <div class="container container-md	">
+
+        <% if (messages.error) { %>
+            <div class="alert alert-danger text-center" role="alert">
+                <%- messages.error %>
+            </div>
+            <% } %>
+
+                <% if (messages.success) { %>
+                    <div class="alert alert-success text-center" role="alert">
+                        <%- messages.success %>
+                    </div>
+                    <% } %>
+
+
+                        <h1 class="text-center">
+                            <%= title %>
+                        </h1>
+
+                        <% if(data.length>0){ %>
+                            <table class="table table-dark table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Cod</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Desciption</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <% data.forEach(function(task){ %>
+                                        <tr>
+                                            <td>
+                                                <%= task.cod %>
+                                            </td>
+                                            <td>
+                                                <%= task.nombre %>
+                                            </td>
+                                            <td>
+                                                <%= task.descipcion %>
+                                            </td>
+                                            <td>
+                                                <div style="float:left">
+                                                    <a class="btn btn-warning"
+                                                        href='/tareas/actualizar/<%= task.cod %>'>Edit</a> &nbsp;
+                                                    <form method="post" action="/tareas/eliminar/<%= task.cod %>"
+                                                        style="float:right">
+                                                        <input class="btn btn-danger" type="submit" name="delete"
+                                                            value='Delete'
+                                                            onClick="return confirm('Estas seguro de eliminar esta tarea?')" />
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                            <% } else{ %>
+                                <div class="alert alert-primary text-center" role="alert">
+                                   No hay tareas en base de datos
+                                  </div>
+                                <% } %>
+
+    </div>
+
+    <%- include('../layouts/footer'); %>

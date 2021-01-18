@@ -6,8 +6,7 @@ const cors = require('cors');
 
 const { database, server } = require('./config');
 
-app.use(cors());
-app.use(express.json());
+
 
 app.use(myConnection(mysql, database, 'pool'))
 
@@ -29,10 +28,16 @@ app.use(session({
     cookie: { maxAge: 60000 }
 }))
 app.use(flash())
- 
 
-const index = require('./routes/index')
-app.use('/', index)
+app.use(cors());
+app.use(express.json());
+
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+ 
+app.use('/', require('./routes/index'))
+app.use('/tareas', require('./routes/tareas'))
 
 app.listen(server.port, (err) => {
     err ? console.log(err) : console.log(`servidor en el puerto ${server.port}: http://${server.host}:${server.port}`)
